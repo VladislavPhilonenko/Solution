@@ -14,8 +14,7 @@ var searchBtn = document.querySelector('.search__btn'),
 	caretDown = document.getElementById('last-caret-down'),
 
 	itemCount = document.querySelector('.item-count'),
-	priceCount = document.querySelector('.price-count'),
-	euro = document.querySelector('.hidden-euro');
+	priceCount = document.querySelector('.price-count');
 
 
  

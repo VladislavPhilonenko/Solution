@@ -7,8 +7,7 @@ var searchBtn = document.querySelector('.search__btn'),
 	dots = document.querySelectorAll(".dot"),
 
 	itemCount = document.querySelector('.item-count'),
-	priceCount = document.querySelector('.price-count'),
-	euro = document.querySelector('.hidden-euro');
+	priceCount = document.querySelector('.price-count');
 
 var slideIndex = 1;
 var count = 0;

@@ -9,7 +9,7 @@ var searchBtn = document.querySelector('.search__btn'),
 
 	priceCount = document.querySelector('.price-count'),
 	itemCount = document.querySelector('.item-count'),
-	euro = document.querySelector('.euro');
+	bagDownPrice = document.querySelector('.bag-down__price');
 
 var h2 = document.createElement('h2');
 h2.classList.add('bag-alert');
@@ -70,17 +70,10 @@ window.onresize = function() {
 function getCartData(){
   return JSON.parse(localStorage.getItem('cart'));
 }
-
-function resetPriceAndCount() {
-	priceCount.innerHTML = '';
-	itemCount.innerHTML = 0;
-	euro.classList.add('hidden-euro');
-	euro.classList.remove('euro');
-
-	localStorage.removeItem('count');
-	localStorage.removeItem('cart');
+function setCartData(o){
+  localStorage.setItem('cart', JSON.stringify(o));
+  return false;
 }
-
 function setItemCount(o) {
 	localStorage.setItem('count', JSON.stringify(o));
   	return false;
@@ -89,12 +82,83 @@ function getItemCount() {
 	return JSON.parse(localStorage.getItem('count'));
 }
 
+function resetPriceAndCount() {
+	priceCount.innerHTML = '';
+	itemCount.innerHTML = 0;
+	bagDownPrice.innerHTML = 0;
+
+	localStorage.removeItem('count');
+	localStorage.removeItem('cart');
+}
+
 var get = getItemCount();
 if(get) {
 	itemCount.innerHTML = get[0];
 	priceCount.innerHTML = get[1];
+	bagDownPrice.innerHTML = get[1];
 }
+showAddedItems();
+removeOneItem();
 
+
+function removeOneItem() {
+	var bagElemsH2 = document.querySelectorAll('.bag__elem__h2');
+	var bagElemsH4 = document.querySelectorAll('.bag__elem__h4');
+	var bagInfo = document.querySelectorAll('.bag__info');
+	var removeItemBtns = document.querySelectorAll('.remove-item-btn');
+	for (let i = 0; i < removeItemBtns.length; i++) {
+		removeItemBtns[i].addEventListener( "click", function(event) {
+			var properties = [];
+			var negative = bagElemsH2[i].innerHTML;
+			var badWords = ['Color: ', 'Size: ', 'Quantity: '];
+			var badWord2 = ['Quantity: '];
+			var test = bagInfo[i].children[2].innerHTML;
+			for (var k = 0; k < badWord2.length; k++) {
+  				test  = test.split(badWord2[k]).join('');
+  			}
+			negative = negative.slice(1);
+	  		negative *= +test;
+	  		negative = +priceCount.innerHTML - +negative;
+			negative = negative.toFixed(2);
+
+			itemCount.innerHTML = +itemCount.innerHTML - +test;
+			priceCount.innerHTML = negative;
+			bagDownPrice.innerHTML = negative;
+			get[0] = +itemCount.innerHTML;
+			get[1] = negative;
+			setItemCount(get);
+			console.log(bagInfo);
+			properties.push(bagElemsH4[i].innerHTML);	
+			properties.push(bagElemsH2[i].innerHTML);	
+			for (var j = 0; j < bagInfo.length; j++) {
+				var test = bagInfo[i].children[j].innerHTML;
+				for (var k = 0; k < badWords.length; k++) {
+	  				test  = test.split(badWords[k]).join('');
+	  			}
+				properties.push(test);
+			}
+
+			var cartData = getCartData();
+
+			for (var item in cartData) {
+				if (cartData[item][0] == properties[0] && cartData[item][1] == properties[1] &&
+					cartData[item][2] == properties[3] && cartData[item][3] == properties[2]) {
+					delete cartData[item];
+				}
+			}
+			bag.children[i].style.display = 'none';
+			console.log(properties);
+			console.log(cartData);
+			setCartData(cartData);
+			if (itemCount.innerHTML == 0) {
+				h2.innerHTML = 'Your shopping bag is empty. Use catalog  to add new items';
+				bag.appendChild(h2);
+			}
+		});
+	}
+
+
+}
 
 function showAddedItems() {
 	var cartData = getCartData();
@@ -108,8 +172,8 @@ function showAddedItems() {
 					<a class="more wrapper" href="item.html">View item</a>
 				</div>`;
 			numberOfItems += '<figcaption>';
-		    numberOfItems += '<h4 class="bag__elem__h4">' + cartData[items][0] + '<h4 class="bag__elem__h4">';
-		    numberOfItems += '<h4 class="bag__elem__h2">' + cartData[items][1] + '<h4 class="bag__elem__h2">';
+		    numberOfItems += '<h4 class="bag__elem__h4">' + cartData[items][0] + '</h4>';
+		    numberOfItems += '<h2 class="bag__elem__h2">' + cartData[items][1] + '<h2>';
 		    numberOfItems += '<div class="bag__info">';
 		    numberOfItems += '<p class="bag__elem__p">Color: ' + cartData[items][3] + '</p>';
 		    numberOfItems += '<p class="bag__elem__p">Size: ' + cartData[items][2] + '</p>';
@@ -125,26 +189,3 @@ function showAddedItems() {
 		bag.appendChild(h2);
 	}
 }
-
-showAddedItems();
-// function openCart(e){
-//   var cartData = getCartData(), // вытаскиваем все данные корзины
-//       totalItems = '';
-//   // если что-то в корзине уже есть, начинаем формировать данные для вывода
-//   if(cartData !== null){
-//     totalItems = '<table class="shopping_list"><tr><th>Наименование</th><th>Цена</th><th>Кол-во</th></tr>';
-//     for(var items in cartData){
-//       totalItems += '<tr>';
-//       for(var i = 0; i < cartData[items].length; i++){
-//         totalItems += '<td>' + cartData[items][i] + '</td>';
-//       }
-//       totalItems += '</tr>';
-//     }
-//     totalItems += '</table>';
-//     cartCont.innerHTML = totalItems;
-//   } else {
-//     // если в корзине пусто, то сигнализируем об этом
-//     cartCont.innerHTML = 'В корзине пусто!';
-//   }
-//   return false;
-// }

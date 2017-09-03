@@ -8,15 +8,12 @@ var searchBtn = document.querySelector('.search__btn'),
 
 	itemCount = document.querySelector('.item-count'),
 	priceCount = document.querySelector('.price-count'),
-	euro = document.querySelector('.hidden-euro'),
 
 	previewShowElem = document.querySelector('.preview__show'),
 	previewImgElem = document.querySelector('.preview__images');
 
 ShowImages();
 selectProperty();
-
-
 
 searchBtn.onclick = function() {
 	searchInput.classList.toggle('change');
@@ -85,8 +82,6 @@ function getRandomArbitary(min, max) {
 
 
 
-
-
 function getCartData(){
   return JSON.parse(localStorage.getItem('cart'));
 }
@@ -104,18 +99,7 @@ function getItemCount() {
 }
 
 addBtn.addEventListener( "click", addToCart);
-addBtn.addEventListener("click", function() {
-	var randomPrice = getRandomArbitary(250, 400);
-	randomPrice = +priceCount.innerHTML + +randomPrice.toFixed(2);
-	priceCount.innerHTML = +randomPrice.toFixed(2);
-	var countArr = [0, 0];
-	itemCount.innerHTML++;
-	countArr[0] = +itemCount.innerHTML;
-	countArr[1] = +priceCount.innerHTML;
-	setItemCount(countArr);
-	euro.classList.remove('hidden-euro');
-	euro.classList.add('euro');
-})
+addBtn.addEventListener("click", changeHeaader);
 
 var received = getItemCount();
 if(received) {
@@ -123,7 +107,17 @@ if(received) {
 	priceCount.innerHTML = received[1];
 }
 
-// Добавляем товар в корзину
+function changeHeaader() {
+	var itemPrice = document.querySelector('.item-info__h2').innerHTML.slice(1);
+	itemPrice = +priceCount.innerHTML + +itemPrice;
+	priceCount.innerHTML = itemPrice.toFixed(2);
+	var countArr = [0, 0];
+	itemCount.innerHTML++;
+	countArr[0] = +itemCount.innerHTML;
+	countArr[1] = priceCount.innerHTML;
+	setItemCount(countArr);
+}
+
 function addToCart(e){
   	this.disabled = true; 
   	var cartData = getCartData() || {}, 
