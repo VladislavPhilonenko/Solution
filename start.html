@@ -9,8 +9,6 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/responsive.css">
 
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Roboto:400,700" rel="stylesheet">
 </head>
 <body>
@@ -23,13 +21,18 @@
 		</div>
 		<div class="login-bag wrapper">
 		 	<a class="login-bag__elem hide-on-small" href="#">E-mail sign up</a>
-	        <a class="login-bag__elem" href="shopping_bag.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Bag (<span>0</span>)</a>
+	        <a class="login-bag__elem" href="shopping_bag.html">
+	        	<img class="icon-shopping-bag" src="images/icons/bag.png" alt="icon">Bag 
+	        	<span class="hidden-euro">£</span> 
+	        	<span class="price-count"></span> 
+	        	(<span class="item-count">0</span>)
+	        </a>
 	        <div class="sandwich show-on-small">
 		    	<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 		    </div>
-		    <div class="hide-menu"><i class="fa fa-times" aria-hidden="true"></i></div>
+		    <img class="hide-menu" src="images/icons/close.png" alt="X">
 	    </div>
 	</div>
 	<nav class="navbar hide-on-small">
@@ -44,7 +47,7 @@
 	        <li><a href="#">Store Locator</a></li>
 	        <li class="search">
 	            <form>
-	            	<button class="search__btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+	            	<button class="search__btn" type="button"><img src="images/icons/search.png" alt="search"></button>
 	                <input class="search__input" type="text" placeholder="Style Name">
 	            </form>
 	        </li>
@@ -91,8 +94,8 @@
 		<div class="dot" onclick="currentSlide(2)"></div>
 		<div class="dot" onclick="currentSlide(3)"></div>
 	</div>
-	<div class=" arrow arrow-left hide-on-med-and-down" onclick="plusSlides(-1)"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-    <div class="arrow arrow-right hide-on-med-and-down" onclick="plusSlides(1)"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+	<div class=" arrow arrow-left hide-on-med-and-down" onclick="plusSlides(-1)"><img src="images/icons/arrow.png" alt="<"></div>
+    <div class="arrow arrow-right hide-on-med-and-down" onclick="plusSlides(1)"><img src="images/icons/arrow.png" alt=">"></div>
 </div>
 
 <div class="banner wrapper">
@@ -182,7 +185,7 @@
         	<div class="wrapper">
         		<section class="social__elem">
 	        		<h5 class="footer__h5">Questions</h5>
-	            	<p class="social__p"><i id="twitter" class="fa fa-twitter" aria-hidden="true"></i>Tweet us <b>@template</b></p>
+	            	<p class="social__p"><img class="twitter" src="images/icons/twitter.png" alt="tw">Tweet us <b>@template</b></p>
 	       		</section>
 	            <section class="social__elem">
 	            	<h5 class="footer__h5">Order by phone</h5>
@@ -199,8 +202,8 @@
 			        </ul>
 			    </div>
 			    <div>
-			    	<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-	            	<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+			    	<a href="#"><img class="facebook" src="images/icons/facebook.png" alt="f"></a>
+	            	<a href="#"><img class="twitter" src="images/icons/twitter-light.png" alt="tw"></a>
 			    </div>
             </div>
         </div>

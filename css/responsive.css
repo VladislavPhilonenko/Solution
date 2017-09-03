@@ -87,7 +87,7 @@
 		display: inline;
 		margin-right: 15px;
 	} 
-	.fa.fa-caret-down {
+	.caret-down {
 		display: none;
 	}
 	#last-caret-down {
@@ -383,7 +383,7 @@
 	}
 
 
-	/*Catalog*/
+	/*Filter*/
 	.filter {
 		min-width: 375px;
 		margin-top: 0px;
@@ -412,7 +412,7 @@
 	.comma {
 		display: inline;
 	} 
-	.fa.fa-caret-down {
+	.caret-down{
 		display: none;
 	}
 	#last-caret-down {
@@ -420,10 +420,9 @@
 		position: absolute;
 		right: 0px;
 		z-index: 990;
-		margin-right: 14px;
-		padding: 7px 20px;
+		margin-right: 35px;
 		background-color: white;
-		box-shadow: 10px 0px 15px 17px white;
+		box-shadow: 10px 0px 15px 40px white;
 	}
 	.dropdown-content {
 		top: 155px;

@@ -49,7 +49,7 @@
 	margin-left: 60px;
 	transition: all .3s;
 }
-.fa-shopping-bag {
+.icon-shopping-bag {
 	margin-right: 15px;
 }
 .icon-bar {
@@ -62,9 +62,7 @@
 }
 .hide-menu {
 	display: none;
-	padding: 20px 30px;
-	font-size: 2em;
-	color: #f14a58;
+	padding: 30px 30px;
 	cursor: pointer;
 }
 .navbar {
@@ -87,7 +85,7 @@
 }
 .search__btn {
 	position: absolute;
-	top: 0px;
+	top: 5px;
 	right: 0px;
 	z-index: 10;
 	font-size: .9em;
@@ -176,7 +174,7 @@
 .arrow {
 	position: absolute;
 	top: 40%;
-	padding: 25px 10px;
+	padding: 20px 10px 25px;
 	font-size: 2.6em;
 	color: white;
 	background-color: #f14a58; 
@@ -187,6 +185,9 @@
 }
 .arrow-right {
 	right: 0;
+}
+.arrow-right img {
+	transform: rotate(180deg);
 }
 .dots {
 	-webkit-justify-content: center;
@@ -351,7 +352,7 @@
 	padding: 50px 0px 100px 80px;
 }	
 .social__elem {
-	flex: 0 1 40%;
+	flex: 0 1 45%;
 }
 .social__p {
 	margin-top: 20px;
@@ -359,23 +360,16 @@
 }
 .social__info {
 	margin-top: 50px;
-	margin-bottom: 40px;
+	margin-bottom: 50px;
 	line-height: 1.7;
 	font-family: 'Times New Roman';
 	color: #969696;
 }
-#twitter {
-	color: #bababa;
+.twitter {
+	margin-right: 10px;
 }
-.fa-twitter {
-	margin: 10px;
-	margin-left: 0px;
-	color: #4bb8f0;
-}
-.fa-facebook {
-	margin: 10px;
-	margin-left: 0px;
-	color: #315295;
+.facebook {
+	margin-right: 20px;
 }
 
 /*SECOND FOOTER*/
@@ -455,9 +449,10 @@
 .comma {
 	display: none;
 }
-.fa-caret-down {
-	margin: 10px 0px;
-	padding-top: 7px;
+.caret-down {
+	display: block;
+	height: 3px;
+	margin-top: 20px;
 }
 .dropdown { 
 	display: none;
@@ -485,8 +480,6 @@
 	position: absolute;
 	right: 0;
 	z-index: 400;
-	color: #f14a58;
-	font-size: 1.7em;
 	cursor: pointer;
 }
 .dropdown-content {
