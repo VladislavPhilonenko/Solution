@@ -6,8 +6,8 @@ var searchBtn = document.querySelector('.search__btn'),
 	props = document.querySelectorAll('.prop'),
 	addBtn = document.querySelector('.add'),
 
-	priceCount = document.querySelector('.price-count'),
 	itemCount = document.querySelector('.item-count'),
+	priceCount = document.querySelector('.price-count'),
 	euro = document.querySelector('.hidden-euro'),
 
 	previewShowElem = document.querySelector('.preview__show'),
@@ -17,14 +17,7 @@ ShowImages();
 selectProperty();
 
 
-addBtn.onclick = function() {
-	+itemCount.innerHTML++;
-	var randomPrice = getRandomArbitary(250, 400);
-	euro.classList.remove('hidden-euro');
-	euro.classList.add('euro');
-	randomPrice = +priceCount.innerHTML + +randomPrice.toFixed(2);
-	priceCount.innerHTML = +randomPrice.toFixed(2);
-}
+
 searchBtn.onclick = function() {
 	searchInput.classList.toggle('change');
 };
@@ -88,4 +81,83 @@ function selectProperty() {
 }
 function getRandomArbitary(min, max) {
   return Math.random() * (max - min) + min;
+}
+
+
+
+
+
+function getCartData(){
+  return JSON.parse(localStorage.getItem('cart'));
+}
+
+function setCartData(o){
+  localStorage.setItem('cart', JSON.stringify(o));
+  return false;
+}
+function setItemCount(o) {
+	localStorage.setItem('count', JSON.stringify(o));
+  	return false;
+}
+function getItemCount() {
+	return JSON.parse(localStorage.getItem('count'));
+}
+
+addBtn.addEventListener( "click", addToCart);
+addBtn.addEventListener("click", function() {
+	var randomPrice = getRandomArbitary(250, 400);
+	randomPrice = +priceCount.innerHTML + +randomPrice.toFixed(2);
+	priceCount.innerHTML = +randomPrice.toFixed(2);
+	var countArr = [0, 0];
+	itemCount.innerHTML++;
+	countArr[0] = +itemCount.innerHTML;
+	countArr[1] = +priceCount.innerHTML;
+	setItemCount(countArr);
+	euro.classList.remove('hidden-euro');
+	euro.classList.add('euro');
+})
+
+var received = getItemCount();
+if(received) {
+	itemCount.innerHTML = received[0];
+	priceCount.innerHTML = received[1];
+}
+
+// Добавляем товар в корзину
+function addToCart(e){
+  	this.disabled = true; 
+  	var cartData = getCartData() || {}, 
+      	itemId = this.getAttribute('data-id'), 
+      	itemTitle = document.querySelector('.item-info__h3').innerHTML,
+	  	itemPrice = document.querySelector('.item-info__h2').innerHTML,
+		highlighted = document.querySelectorAll('.prop-highlight'),
+		size = highlighted[0].innerHTML,
+		color = highlighted[1].innerHTML;
+  if(cartData.hasOwnProperty(itemId) && cartData[itemId][2] == size && cartData[itemId][3] == color) { // если такой товар уже в корзине, то добавляем +1 к его количеству
+    cartData[itemId][4] += 1;
+  } else if (cartData.hasOwnProperty(itemId)) {
+  	if (cartData[itemId][2] != size || cartData[itemId][3] != color) {
+  		var count = 1;
+  		var test = 1;
+  		for (var key in cartData) {
+  			if (cartData[key][0] == itemTitle && cartData[key][2] == size && cartData[key][3] == color) {
+  				cartData[key][4] += 1;
+  				test = 0;
+  			}
+	  		count++;
+	  	}
+	  	if(count == 2) {
+	  		count = 3;
+	  	}
+	  	if (test != 0) {
+	  		cartData[count] = [itemTitle, itemPrice, size, color,  1];
+	  	}
+  	}
+  } else { 
+    cartData[itemId] = [itemTitle, itemPrice, size, color,  1];
+  }
+  if(!setCartData(cartData)){ 
+    this.disabled = false; 
+  }
+ return false;
 }

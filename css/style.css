@@ -608,6 +608,13 @@
 	font-weight: bold;
 	word-wrap: normal;
 	cursor: pointer;
+	transition: all .3s;
+}
+.prop li:hover {
+	color: #f14a58;
+}
+.prop li:nth-child(1):hover {
+	color: black;
 }
 .add {
 	display: block;

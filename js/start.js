@@ -4,7 +4,11 @@ var searchBtn = document.querySelector('.search__btn'),
 	nav = document.querySelector('.navbar'),
 	close = document.querySelector('.hide-menu'),
 	slides = document.querySelectorAll(".slide"),
-	dots = document.querySelectorAll(".dot");
+	dots = document.querySelectorAll(".dot"),
+
+	itemCount = document.querySelector('.item-count'),
+	priceCount = document.querySelector('.price-count'),
+	euro = document.querySelector('.hidden-euro');
 
 var slideIndex = 1;
 var count = 0;
@@ -131,3 +135,18 @@ function mobile() {
 		slides[i].innerHTML = '<a href="item.html"><img src="images/slide-for-mob-' + i + '.jpg" alt=""></a>';
 	}
 };
+
+
+function setItemCount(o) {
+	localStorage.setItem('count', JSON.stringify(o));
+  	return false;
+}
+function getItemCount() {
+	return JSON.parse(localStorage.getItem('count'));
+}
+
+var get = getItemCount();
+if(get) {
+	itemCount.innerHTML = get[0];
+	priceCount.innerHTML = get[1];
+}

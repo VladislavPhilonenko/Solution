@@ -11,7 +11,11 @@ var searchBtn = document.querySelector('.search__btn'),
 	filterElems = document.querySelectorAll('.filter__elem'),
 	filterElemsH2 = document.querySelectorAll('.filter__elem__h2'),
 	dropdown = document.querySelectorAll('.dropdown'),
-	caretDown = document.getElementById('last-caret-down');
+	caretDown = document.getElementById('last-caret-down'),
+
+	itemCount = document.querySelector('.item-count'),
+	priceCount = document.querySelector('.price-count'),
+	euro = document.querySelector('.hidden-euro');
 
 
  
@@ -281,4 +285,18 @@ function createAndInsert(tag) {
 			}
     	}
 	}
+}
+
+function setItemCount(o) {
+	localStorage.setItem('count', JSON.stringify(o));
+  	return false;
+}
+function getItemCount() {
+	return JSON.parse(localStorage.getItem('count'));
+}
+
+var get = getItemCount();
+if(get) {
+	itemCount.innerHTML = get[0];
+	priceCount.innerHTML = get[1];
 }

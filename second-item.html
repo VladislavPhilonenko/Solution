@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Shopping Bag</title>
+	<title>Item</title>
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/responsive.css">
@@ -32,7 +32,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 		    </div>
-		    <img class="hide-menu" src="images/icons/close.png" alt="X">
+		   <img class="hide-menu" src="images/icons/close.png" alt="X">
 	    </div>
 	</div>
 	<nav class="navbar hide-on-small">
@@ -55,31 +55,65 @@
 	</nav>
 </header>
 
-<section>
-	<div class="back">
-		<div class="container">
-			<h1 class="back__h1">Shopping bag</h1>
-		</div>
+<div class="back">
+	<div class="container">
+		<a class="back__link" href="catalog.html"> &lt; Back to catalog</a>
 	</div>
+</div>
 
-	<div class="bag container wrapper">
-		
-	</div>
-
-	<div class="bag-down wrapper">
-		<div class="bag-down__info">
-			<p class="bag-down__p">You've qualified for Free UK Next Day Delivery on your order. Don't forget to enter the code <span class="bag-down__span">nexday</span> at checkout</p>
+<div class="item container wrapper">
+	<div class="preview wrapper">
+		<div class="preview__show wrapper">
+			<img src="images/second-item-img/1.jpeg" alt="preview image">
+			<img src="images/second-item-img/2.jpg" alt="preview image">
+			<img src="images/second-item-img/3.jpeg" alt="preview image">
 		</div>
-		<div class="buy-item container wrapper">
-			<button class="bag-down__btn-empty">Empty bag</button>
-			<button class="btn bag-down__btn" type="button">Buy now</button>
-			<div class="price">
-				<h5 class="bag-down__h5">Total Cost</h5>
-				<h4 class="bag-down__h4">£180.60</h4>
+		<div class="preview__images wrapper">
+			<div class="preview__img">
+				<img src="images/second-item-img/1.jpeg" alt="preview image"> 
+				<span class="selected-img"></span>
+			</div>
+			<div class="preview__img">
+				<img src="images/second-item-img/2.jpg" alt="preview image"> 
+				<span class="selected-img"></span>
+			</div>
+			<div class="preview__img">
+				<img src="images/second-item-img/3.jpeg" alt="preview image"> 
+				<span class="selected-img"></span>
 			</div>
 		</div>
 	</div>
-</section>
+	<section class="item-info">
+		<h3 class="item-info__h3">Old Skinny Jeans</h3>
+		<h2 class="item-info__h2 show-on-med-and-down">£350.25</h2>
+		<p class="item-info__p">Featuring fine Italian wool, this elegant suit has pick-stitch edging, cascade buttons at the cuffs and a subtle stripe pattern throughout.</p>
+		<h2 class="item-info__h2 hide-on-med-and-down">£350.25</h2>
+		<ul class="prop wrapper">
+			<li>Size:</li>
+			<li class="prop-highlight">UK 20S</li>
+			<li>UK 20L</li>
+			<li>UK 22S</li>
+			<li>UK 22</li>
+		</ul><br>
+		<ul class="prop wrapper">
+			<li>Color:</li>
+			<li class="prop-highlight">Black</li>
+			<li>Blue</li>
+			<li>Golden</li>
+		</ul>
+		<button class="btn add" data-id="2" type="button">Add to bag</button>
+	</section>
+</div>
+
+<div class="banner banner-catalog wrapper">
+	<div class="banner__left wrapper">
+		<a href="item.html"><img src="images/slide-2-1.jpg" alt="banner"></a>
+	</div>
+	<div class="banner__right wrapper hide-on-small">
+		<a href="catalog.html"><img src="images/slide-2-4.jpg" alt="banner"></a>
+		<a href="catalog.html" class="hide-on-med-and-down"><img src="images/slide-2-5.jpg" alt="banner"></a>
+	</div>
+</div>
 
 <footer class="footer">
     <div class="wrapper container">
@@ -148,6 +182,6 @@
     </div>
 </footer>
 
-<script src="js/bag.js"></script>
+<script src="js/item.js"></script>
 </body>
 </html>
