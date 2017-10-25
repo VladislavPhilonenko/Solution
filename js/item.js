@@ -1,7 +1,6 @@
 var searchBtn = document.querySelector('.search__btn'),
 	searchInput = document.querySelector('.search__input'),
 	sandwich = document.querySelector('.sandwich'),
-	nav = document.querySelector('.navbar'),
 	close = document.querySelector('.hide-menu'),
 	props = document.querySelectorAll('.prop'),
 	addBtn = document.querySelector('.add'),
@@ -15,36 +14,11 @@ var searchBtn = document.querySelector('.search__btn'),
 ShowImages();
 selectProperty();
 
-searchBtn.onclick = function() {
-	searchInput.classList.toggle('change');
-};
 sandwich.onclick = function() {
-	sandwich.style.display = 'none';
-	nav.style.display = 'block';
 	close.style.display = 'block';
 };
 close.onclick = function() {
 	close.style.display = 'none';
-	nav.style.display = 'none';
-	sandwich.style.display = 'block';
-};
-
-window.onresize = function() {
-	if (window.innerWidth > 1024) {
-        sandwich.style.display = 'none';
-        nav.style.display = 'block';
-    	close.style.display = 'none';
-    }
-     if (window.innerWidth <= 1024 && window.innerWidth >= 768) {
-     	sandwich.style.display = 'none';
-        nav.style.display = 'block';
-    	close.style.display = 'none';
-    }
-    if (window.innerWidth < 768) {
-       	sandwich.style.display = 'block';
-    	nav.style.display = 'none';
-    	close.style.display = 'none';
-    }
 };
 
 function ShowImages() {
@@ -98,8 +72,8 @@ function getItemCount() {
 	return JSON.parse(localStorage.getItem('count'));
 }
 
-addBtn.addEventListener( "click", addToCart);
 addBtn.addEventListener("click", changeHeaader);
+addBtn.addEventListener( "click", addToCart);
 
 var received = getItemCount();
 if(received) {
@@ -127,31 +101,29 @@ function addToCart(e){
 		highlighted = document.querySelectorAll('.prop-highlight'),
 		size = highlighted[0].innerHTML,
 		color = highlighted[1].innerHTML;
-  if(cartData.hasOwnProperty(itemId) && cartData[itemId][2] == size && cartData[itemId][3] == color) { // если такой товар уже в корзине, то добавляем +1 к его количеству
-    cartData[itemId][4] += 1;
-  } else if (cartData.hasOwnProperty(itemId)) {
-  	if (cartData[itemId][2] != size || cartData[itemId][3] != color) {
-  		var count = 1;
-  		var test = 1;
-  		for (var key in cartData) {
-  			if (cartData[key][0] == itemTitle && cartData[key][2] == size && cartData[key][3] == color) {
-  				cartData[key][4] += 1;
-  				test = 0;
-  			}
-	  		count++;
-	  	}
-	  	if(count == 2) {
-	  		count = 3;
-	  	}
-	  	if (test != 0) {
-	  		cartData[count] = [itemTitle, itemPrice, size, color,  1];
-	  	}
-  	}
-  } else { 
-    cartData[itemId] = [itemTitle, itemPrice, size, color,  1];
-  }
-  if(!setCartData(cartData)){ 
-    this.disabled = false; 
-  }
- return false;
+  	if(cartData.hasOwnProperty(itemId) && cartData[itemId][2] == size && cartData[itemId][3] == color) { 
+    	cartData[itemId][4] += 1;
+  	} else if (cartData.hasOwnProperty(itemId)) {
+  		if (cartData[itemId][2] != size || cartData[itemId][3] != color) {
+	  		var count = 1;
+	  		var test = 1;
+	  		for (var key in cartData) {
+	  			if (cartData[key][0] == itemTitle && cartData[key][2] == size && cartData[key][3] == color) {
+	  				cartData[key][4] += 1;
+	  				test = 0;
+	  			}
+		  		count++;
+		  	}
+		  	count++;
+		  	if (test != 0) {
+		  		cartData[count] = [itemTitle, itemPrice, size, color,  1];
+		  	}
+  		}
+    } else { 
+    	cartData[itemId] = [itemTitle, itemPrice, size, color,  1];
+    }
+  	if(!setCartData(cartData)){ 
+    	this.disabled = false; 
+    }
+    return false;
 }

@@ -8,8 +8,6 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/responsive.css">
-
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Roboto:400,700" rel="stylesheet">
 </head>
 <body>
 	
@@ -27,16 +25,15 @@
 	        	<span class="price-count">0</span> 
 	        	(<span class="item-count">0</span>)
 	        </a>
-	        <div class="sandwich show-on-small">
+	        <a href="#menu" class="sandwich show-on-small">
 		    	<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-		    </div>
-		    <img class="hide-menu" src="images/icons/close.png" alt="X">
+		    </a>
 	    </div>
 	</div>
-	<nav class="navbar hide-on-small">
-		<ul class="wrapper">
+	<nav id="menu" class="navbar hide-on-small">
+		<ul id="menu2" class="wrapper">
 	        <li><a href="#">Women</a></li>
 	        <li><a href="#">Men</a></li>
 	        <li><a href="#">Handbags</a></li>
@@ -53,9 +50,10 @@
 	        </li>
 	    </ul>
 	</nav>
+	<a href="#menu2" class="show-on-small"><img class="hide-menu" src="images/icons/close.png" alt="X"></a>
 </header>
 
-<div class="carousel">
+<main class="carousel">
 	<div class="slide active-slide fade">
 		<a href="catalog.html"><img src="images/slide-0.jpg" alt="slide 1"></a>
 	</div>
@@ -89,14 +87,10 @@
 	<div class="slide fade">
 		<a href="catalog.html"><img src="images/slide-2.jpg" alt="slide 3"></a>
 	</div>
-	<div class="dots wrapper">
-		<div class="dot active-dot" onclick="currentSlide(1)"></div>
-		<div class="dot" onclick="currentSlide(2)"></div>
-		<div class="dot" onclick="currentSlide(3)"></div>
-	</div>
-	<div class=" arrow arrow-left hide-on-med-and-down" onclick="plusSlides(-1)"><img src="images/icons/arrow.png" alt="<"></div>
-    <div class="arrow arrow-right hide-on-med-and-down" onclick="plusSlides(1)"><img src="images/icons/arrow.png" alt=">"></div>
-</div>
+	<div class="dots wrapper"></div>
+	<div class=" arrow arrow-left hide-on-med-and-down"><img class="arrow-left__img" src="images/icons/arrow.png" alt="<"></div>
+    <div class="arrow arrow-right hide-on-med-and-down"><img class="arrow-right__img" src="images/icons/arrow.png" alt=">"></div>
+</main>
 
 <div class="banner wrapper">
 	<div class="banner__left">

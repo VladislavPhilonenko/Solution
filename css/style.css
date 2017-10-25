@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'Open Sans'; 
+    src: url("..//fonts/Open_Sans/OpenSans-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Open Sans Bold'; 
+    src: url("..//fonts/Open_Sans/OpenSans-Bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Roboto'; 
+    src: url("..//fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Roboto Bold'; 
+    src: url("..//fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+}
 .container {
 	width: 90%;
 	max-width: 1180px;
@@ -21,9 +37,7 @@
 	padding: 20px 100px;
 	border: 1px solid #e5e5e5;
 	font-size: 1.5em;
-	letter-spacing: 1.2px;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: bold;
+	font-family: 'Open Sans Bold', sans-serif;
 	cursor: pointer;
 	transition: all .5s;
 }
@@ -38,8 +52,7 @@
 	margin-top: 20px;
 }
 .logo {
-	font-size: 2em;
-	font-weight: bold;
+	font: 2em 'Open Sans Bold', sans-serif;
 }
 .login-bag {
 	padding-top: 10px;
@@ -60,17 +73,13 @@
 	padding: 1px 5px;
 	background-color: black;
 }
-.hide-menu {
-	display: none;
-	padding: 30px 30px;
-	cursor: pointer;
-}
 .navbar {
 	margin-top: 15px;
 	font-size: .9em;
 	font-weight: bold;
 }
 .navbar li {
+	font-family: 'Open Sans Bold', sans-serif;
 	transition: all .3s;
 }  
 .navbar li:hover,
@@ -100,13 +109,13 @@
 	padding: 0px 20px 6px 0px;
 	border: none;
 	border-bottom: 2px solid #e5e5e5;
-	font: bold 1em 'Open Sans', sans-serif;
+	font: .9em 'Open Sans Bold', sans-serif;
 }
 .search__input::-webkit-input-placeholder, 
 .search__input::-moz-placeholder, 
 .search__input::-ms-input-placeholder,
 .search__input:-ms-input-placeholder {
-	font: bold .9em 'Open Sans', sans-serif;
+	font: bold .9em 'Open Sans Bold', sans-serif;
 }
 
 /*CAROUSEL*/
@@ -174,9 +183,7 @@
 .arrow {
 	position: absolute;
 	top: 40%;
-	padding: 20px 10px 25px;
-	font-size: 2.6em;
-	color: white;
+	padding: 35px 10px 30px;
 	background-color: #f14a58; 
 	cursor: pointer;
 }
@@ -255,9 +262,7 @@
 }
 .new-arrivals__h2 {
 	margin: 100px 0px 80px;
-	font-size: 2.8em;
-	font-weight: bold;
-	letter-spacing: 2px;
+	font: 2.8em 'Open Sans Bold', sans-serif;
 }
 .new-arrivals__inner {
 	-webkit-flex-wrap: wrap;
@@ -286,8 +291,7 @@
 	z-index: 99;
 	width: 100%;
 	height: 100%;
-	font-size: 1.5em;
-	font-weight: bold;
+	font: 1.5em 'Open Sans Bold', sans-serif;
 	color: #f14a58;
 	background-color: rgba(0, 0, 0, 0.5);
 	opacity: 0;
@@ -299,9 +303,9 @@
 	color: #f14a58;
 }
 .new-arrivals__h4 {
-	margin-top: 20px;
+	margin-top: 40px;
 	line-height: 1.5;
-	font: bold .9em 'Roboto', sans-serif;
+	font: .9em 'Roboto Bold', sans-serif;
 	transition: all .5s;
 }
 .new-arrivals__p {
@@ -333,7 +337,7 @@
 	border-right: 1px solid #e5e5e5;
 }
 .footer__h5 {
-	font-weight: bold;
+	font-family: 'Open Sans Bold', sans-serif;
 }
 .quick-links__ul {
 	margin-top: 45px;
@@ -380,15 +384,14 @@
 	padding: 20px 0px;
 }
 .footer__elem-first {
-	font: normal bold .8em 'Roboto', sans-serif;
+	font: normal .8em 'Roboto Bold', sans-serif;
 }
 .footer__elem-second {
 	-webkit-align-items: center;
 	align-items: center;
 }
 .footer__elem-second__p {
-	font-size: 1.1em;
-	font-weight: bold;
+	font: 1.1em 'Open Sans Bold', sans-serif;
 }
 .footer__elem-second__button {
 	margin-left: 10px;
@@ -397,8 +400,7 @@
 }
 .list-elements li {
 	margin: 10px;
-	font-size: .8em;
-	font-weight: bold;
+	font: .8em 'Open Sans Bold', sans-serif;
 	transition: all .3s;
 }
 
@@ -435,15 +437,12 @@
 }
 .filter__elem__h2 {
 	margin: 10px 0px;
-	font-size: 1.6em;
-	line-height: 1.4;
-	font-weight: bold;
+	font: 1.6em/1.4 'Open Sans Bold', sans-serif;
 }
 .title {
 	position: absolute;
 	top: 30px;
-	font-size: 1.5em;
-	font-weight: bold;
+	font: 1.5em 'Open Sans Bold', sans-serif;
 	color: #f14a58;
 }
 .comma {
@@ -462,8 +461,7 @@
 	z-index: 999;
 	width: 100%;
 	outline: 1px solid #e5e5e5;
-	font-size: 1.3em;
-    font-weight: bold;
+	font: 1.3em 'Open Sans Bold', sans-serif;
     background-color: white;
 }
 .dropdown li { 
@@ -491,8 +489,7 @@
 	z-index: 990;
 	width: 100%;
 	padding-bottom: 20px;
-	font-size: 1em;
-	font-weight: bold;
+	font: 1em 'Open Sans Bold', sans-serif;
 	color: #a8a8a8;
     background-color: white;
 }
@@ -507,8 +504,7 @@
 }
 .discount__h2 {
 	margin-bottom: 10px;
-	font-size: 1.5em;
-	font-weight: bold;
+	font: 1.5em 'Open Sans Bold', sans-serif;
 }
 .discount__span {
  	color: #f14a58;
@@ -529,7 +525,7 @@
 .back__link {
 	display: inline-block;
 	margin: 20px;
-	font-weight: bold;
+	font: 1em 'Open Sans Bold', sans-serif;
 	transition: all .3s;
 }
 .item {
@@ -578,7 +574,7 @@
 }
 .item-info__h3 {
 	margin: 18px 0px; 
-	font: bold 1.6em 'Roboto', sans-serif;
+	font: 1.6em 'Roboto Bold', sans-serif;
 }
 .item-info__p {
 	font: italic 1em/1.8 'Times New Roman', sans-serif;
@@ -605,7 +601,7 @@
 	padding: 10px;
 	border: 1px solid white;
 	text-align: center;
-	font-weight: bold;
+	font-family: 'Open Sans Bold', sans-serif;
 	word-wrap: normal;
 	cursor: pointer;
 	transition: all .3s;
@@ -625,8 +621,7 @@
 /*SHOPING BAG*/
 .back__h1 {
 	margin: 20px;
-	font-weight: bold;
-	font-size: 1.6em;
+	font: 1.6em 'Open Sans Bold', sans-serif;
 }
 .bag {
 	-webkit-flex-wrap: wrap;
@@ -655,18 +650,18 @@
 	margin-left: 30px;
 }
 .bag__elem__h4 {
-	font: bold .9em/2 'Roboto', sans-serif;
+	font: .9em/2 'Roboto Bold', sans-serif;
 	transition: all .5s;
 }
 .bag__elem__h2 {
-	font: bold 1.2em/2 'Roboto', sans-serif;
+	font: 1.2em/2 'Roboto Bold', sans-serif;
 }
 .bag__elem__p {
 	margin: 10px 0px;
 	font: .8em 'Roboto', san-serif;
 }
 .remove-item-btn {
-	font: bold .9em/2 'Roboto', sans-serif;
+	font: .9em/2 'Roboto Bold', sans-serif;
 	color: #f14a58;
 	cursor: pointer;
 }
@@ -681,8 +676,7 @@
 	border-top: 1px solid #e5e5e5; 
 	border-bottom: 1px solid #e5e5e5; 
 	text-align: center;
-	font-size: .8em;
-	font-weight: bold;
+	font: .8em 'Open Sans Bold', sans-serif;
 	background-color: #f7f7f7;
 }
 .bag-down__p {
@@ -698,7 +692,7 @@
 	padding-bottom: 20px;
 }
 .bag-down__btn-empty {
-	font: bold .9em 'Roboto', sans-serif;
+	font: .9em 'Roboto Bold', sans-serif;
 	cursor: pointer;
 }
 .bag-down__btn {
@@ -711,8 +705,7 @@
 	font: .9em 'Roboto', sans-serif;
 }
 .bag-down__h4 {
-	font-weight: bold;
-	font-size: 1.2em;
+	font: 1.2em 'Open Sans Bold', sans-serif;
 }
 
 /*js classes*/
@@ -722,9 +715,6 @@
 }
 li.prop-highlight {
 	border-color: #e5e5e5;
-}
-.hidden-euro {
-	display: none;
 }
 .bag-alert {
 	width: 100%;

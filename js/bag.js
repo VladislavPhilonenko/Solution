@@ -1,7 +1,6 @@
 var searchBtn = document.querySelector('.search__btn'),
 	searchInput = document.querySelector('.search__input'),
 	sandwich = document.querySelector('.sandwich'),
-	nav = document.querySelector('.navbar'),
 	close = document.querySelector('.hide-menu'),
 	removeAllItemsBtn = document.querySelector('.bag-down__btn-empty'),
 	bag = document.querySelector('.bag'),
@@ -35,36 +34,11 @@ removeAllItemsBtn.onclick = function() {
 	bag.appendChild(h2);
 	resetPriceAndCount();
 }
-searchBtn.onclick = function() {
-	searchInput.classList.toggle('change');
-};
 sandwich.onclick = function() {
-	sandwich.style.display = 'none';
-	nav.style.display = 'block';
 	close.style.display = 'block';
 };
 close.onclick = function() {
 	close.style.display = 'none';
-	nav.style.display = 'none';
-	sandwich.style.display = 'block';
-};
-
-window.onresize = function() {
-	if (window.innerWidth > 1024) {
-        sandwich.style.display = 'none';
-        nav.style.display = 'block';
-    	close.style.display = 'none';
-    }
-     if (window.innerWidth <= 1024 && window.innerWidth >= 768) {
-     	sandwich.style.display = 'none';
-        nav.style.display = 'block';
-    	close.style.display = 'none';
-    }
-    if (window.innerWidth < 768) {
-       	sandwich.style.display = 'block';
-    	nav.style.display = 'none';
-    	close.style.display = 'none';
-    }
 };
 
 function getCartData(){
@@ -83,23 +57,27 @@ function getItemCount() {
 }
 
 function resetPriceAndCount() {
-	priceCount.innerHTML = '';
+	priceCount.innerHTML = '0';
 	itemCount.innerHTML = 0;
 	bagDownPrice.innerHTML = 0;
 
-	localStorage.removeItem('count');
-	localStorage.removeItem('cart');
+	localStorage.clear();
 }
 
-var get = getItemCount();
-if(get) {
-	itemCount.innerHTML = get[0];
-	priceCount.innerHTML = get[1];
-	bagDownPrice.innerHTML = get[1];
+var received = getItemCount();
+if(received) {
+	itemCount.innerHTML = received[0];
+	priceCount.innerHTML = received[1];
+	bagDownPrice.innerHTML = received[1];
 }
+
+if (itemCount.innerHTML == 0) {
+	h2.innerHTML = 'Your shopping bag is empty. Use catalog  to add new items';
+	bag.appendChild(h2);
+}
+
 showAddedItems();
 removeOneItem();
-
 
 function removeOneItem() {
 	var bagElemsH2 = document.querySelectorAll('.bag__elem__h2');
@@ -111,53 +89,108 @@ function removeOneItem() {
 			var properties = [];
 			var negative = bagElemsH2[i].innerHTML;
 			var badWords = ['Color: ', 'Size: ', 'Quantity: '];
-			var badWord2 = ['Quantity: '];
 			var test = bagInfo[i].children[2].innerHTML;
-			for (var k = 0; k < badWord2.length; k++) {
-  				test  = test.split(badWord2[k]).join('');
+			for (var k = 0; k < badWords.length; k++) {
+  				test  = test.split(badWords[k]).join('');
   			}
-			negative = negative.slice(1);
-	  		negative *= +test;
-	  		negative = +priceCount.innerHTML - +negative;
-			negative = negative.toFixed(2);
 
-			itemCount.innerHTML = +itemCount.innerHTML - +test;
-			priceCount.innerHTML = negative;
-			bagDownPrice.innerHTML = negative;
-			get[0] = +itemCount.innerHTML;
-			get[1] = negative;
-			setItemCount(get);
-			console.log(bagInfo);
-			properties.push(bagElemsH4[i].innerHTML);	
-			properties.push(bagElemsH2[i].innerHTML);	
-			for (var j = 0; j < bagInfo.length; j++) {
-				var test = bagInfo[i].children[j].innerHTML;
-				for (var k = 0; k < badWords.length; k++) {
-	  				test  = test.split(badWords[k]).join('');
-	  			}
-				properties.push(test);
-			}
+  			if (test != 1) {
+  				changeHeader();
+				var cartData = getCartData();
 
-			var cartData = getCartData();
-
-			for (var item in cartData) {
-				if (cartData[item][0] == properties[0] && cartData[item][1] == properties[1] &&
-					cartData[item][2] == properties[3] && cartData[item][3] == properties[2]) {
-					delete cartData[item];
+				for (var item in cartData) {
+					if (cartData[item][0] == properties[0] && cartData[item][1] == properties[1] &&
+						cartData[item][2] == properties[3] && cartData[item][3] == properties[2]) {
+						cartData[item][4] -= 1;
+					}
 				}
-			}
-			bag.children[i].style.display = 'none';
-			console.log(properties);
-			console.log(cartData);
-			setCartData(cartData);
-			if (itemCount.innerHTML == 0) {
-				h2.innerHTML = 'Your shopping bag is empty. Use catalog  to add new items';
-				bag.appendChild(h2);
-			}
+				setCartData(cartData);
+  			} else {
+  				changeHeader();
+				var cartData = getCartData();
+
+				for (var item in cartData) {
+					if (cartData[item][0] == properties[0] && cartData[item][1] == properties[1] &&
+						cartData[item][2] == properties[3] && cartData[item][3] == properties[2]) {
+						delete cartData[item];
+					}
+				}
+				setCartData(cartData);
+
+				bag.innerHTML = '';
+				showAddedItems();
+				removeOneItem();
+				if (itemCount.innerHTML == 0) {
+					h2.innerHTML = 'Your shopping bag is empty. Use catalog  to add new items';
+					bag.appendChild(h2);
+				}
+  			}
+
+  			function changeHeader() {
+  				test--;
+  				negative = negative.slice(1);
+  				negative = +priceCount.innerHTML - +negative;
+				negative = negative.toFixed(2);
+				itemCount.innerHTML = +itemCount.innerHTML - 1;
+				priceCount.innerHTML = negative;
+				bagDownPrice.innerHTML = negative;
+				bagInfo[i].children[2].innerHTML = 'Quantity: ' + test;
+				received[0] = +itemCount.innerHTML;
+				received[1] = negative;
+				setItemCount(received);
+
+				properties.push(bagElemsH4[i].innerHTML);	
+				properties.push(bagElemsH2[i].innerHTML);	
+				for (var j = 0; j < bagInfo[i].children.length; j++) {
+					var test2 = bagInfo[i].children[j].innerHTML;
+					for (var k = 0; k < badWords.length; k++) {
+		  				test2  = test2.split(badWords[k]).join('');
+		  			}
+					properties.push(test2);
+				}
+  			}
+
+			// negative = negative.slice(1);
+	  		// negative *= +test;
+	  		// negative = +priceCount.innerHTML - +negative;
+			// negative = negative.toFixed(2);
+
+			// itemCount.innerHTML = +itemCount.innerHTML - +test;
+			// priceCount.innerHTML = negative;
+			// bagDownPrice.innerHTML = negative;
+			// received[0] = +itemCount.innerHTML;
+			// received[1] = negative;
+			// setItemCount(received);
+
+			// properties.push(bagElemsH4[i].innerHTML);	
+			// properties.push(bagElemsH2[i].innerHTML);	
+			// for (var j = 0; j < bagInfo[i].children.length; j++) {
+			// 	var test = bagInfo[i].children[j].innerHTML;
+			// 	for (var k = 0; k < badWords.length; k++) {
+	  		// 		test  = test.split(badWords[k]).join('');
+	  		// 	}
+			// 	properties.push(test);
+			// }
+
+			// var cartData = getCartData();
+
+			// for (var item in cartData) {
+			// 	if (cartData[item][0] == properties[0] && cartData[item][1] == properties[1] &&
+			// 		cartData[item][2] == properties[3] && cartData[item][3] == properties[2]) {
+			// 		delete cartData[item];
+			// 	}
+			// }
+			// setCartData(cartData);
+
+			// bag.innerHTML = '';
+			// showAddedItems();
+			// removeOneItem();
+			// if (itemCount.innerHTML == 0) {
+			// 	h2.innerHTML = 'Your shopping bag is empty. Use catalog  to add new items';
+			// 	bag.appendChild(h2);
+			// }
 		});
 	}
-
-
 }
 
 function showAddedItems() {

@@ -2,7 +2,6 @@ var searchBtn = document.querySelector('.search__btn'),
 	searchInput = document.querySelector('.search__input'),
 
 	sandwich = document.querySelector('.sandwich'),
-	nav = document.querySelector('.navbar'),
 	close = document.querySelector('.hide-menu'),
 
 	filter = document.querySelector('.filter'),
@@ -19,13 +18,12 @@ var searchBtn = document.querySelector('.search__btn'),
 
  
 if (filter) {														//Подготовка к работе с фильтром
-	var selectedTd = [],                          					//если 0, то ни в одном из +-шести dropdown ни одного подсвеченого элемента
+	var selectedTd = [],                          					
 		h2Arr = [],                                              	//массив изначальных значений filterElemsH2
 		highlightedFilterElems = [];                              	//все элементы подсвеченые в фильтре 
 	for (var i = 0; i < filterElems.length; i++) {
 		selectedTd.push(0);
 	}
-	console.log(selectedTd);
 
 	createAndInsert('div');
 
@@ -33,36 +31,35 @@ if (filter) {														//Подготовка к работе с фильт�
 		h2Arr.push(filterElemsH2[i].innerText);
 	}
 	hideAndShowFilterContent();
-	DesctopFilter();
+	desktopFilter();
 }
 
 if (window.innerWidth <= 1024 && window.innerWidth >= 768) {
     createAndInsert('li');
 	createAndInsert('span');
+	for (var i = 0; i < dropdownContent.children.length; i++) {
+		dropdownContent.children[i].children[1].style.color = 'black';
+	}
 	tabMobFilter();
 }
 
 if (window.innerWidth < 768) {
     createAndInsert('li');
 	createAndInsert('span');
+	for (var i = 0; i < dropdownContent.children.length; i++) {
+		dropdownContent.children[i].children[1].style.color = 'black';
+	}
 	tabMobFilter();
 }
 
 
 
-searchBtn.onclick = function() {
-	searchInput.classList.toggle('change');
-}
 sandwich.onclick = function() {
-	sandwich.style.display = 'none';
-	nav.style.display = 'block';
 	close.style.display = 'block';
-}
+};
 close.onclick = function() {
 	close.style.display = 'none';
-	nav.style.display = 'none';
-	sandwich.style.display = 'block';
-}
+};
 window.onresize = function() {
 	if (window.innerWidth > 1024) {
         if(closeDropdown && caretDown && dropdownContent) {
@@ -70,12 +67,7 @@ window.onresize = function() {
         	caretDown.style.display = 'inline-block';
         	dropdownContent.style.display = 'none';
         }
-        sandwich.style.display = 'none';
-        close.style.display = 'none';
-        nav.style.display = 'block';
 
-
-        //filter
 		for (var i = 0; i < filterElems.length; i++) {
 			if (filterElems[i].children[0].children.length >= 1) {
 				filterElems[i].children[0].removeChild(filterElems[i].children[0].children[0]);
@@ -92,6 +84,9 @@ window.onresize = function() {
 				dropdown[i].removeChild(dropdown[i].children[0]);
 			}
 		}
+		for (var i = 0; i < filterElems.length; i++) {	
+        	dropdown[i].children[0].style.color = 'black';
+        }
         for (var i = 0; i < highlightedFilterElems.length; i++) {
         	highlightedFilterElems[i].style.backgroundColor = 'rgb(229, 229, 229)';
         	highlightedFilterElems[i].children[0].style.marginTop = 0 + 'px';
@@ -106,14 +101,14 @@ window.onresize = function() {
         }
     }
     if (window.innerWidth <= 1024 && window.innerWidth >= 768) {
-        nav.style.display = 'block';
-        sandwich.style.display = 'none';
-        close.style.display = 'none';
 
         tabMobFilter();
+        createAndInsert('li');
+        createAndInsert('span');
         for (var i = 0; i < filterElems.length; i++) {
         	if(filterElems[i].style.backgroundColor == 'rgb(229, 229, 229)') {
         		highlightedFilterElems.push(filterElems[i]);
+        		dropdown[i].children[1].style.color = 'rgb(168, 168, 168)';
         		filterElems[i].style.backgroundColor = 'white';
         	}
         }
@@ -127,15 +122,9 @@ window.onresize = function() {
 			filterElems[i].children[0].style.fontSize = 1.6 + 'em';
 			filterElems[i].style.backgroundColor = 'white';
 			filterElems[i].children[1].innerHTML = '';
-
         }
-        createAndInsert('li');
-        createAndInsert('span');
     }
     if (window.innerWidth < 768) {
-        sandwich.style.display = 'block';
-        nav.style.display = 'none';
-        close.style.display = 'none';
 
         tabMobFilter();
         for (var i = 0; i < filterElems.length; i++) {
@@ -177,7 +166,7 @@ function hideAndShowFilterContent() {
 	    }
 	});
 }
-function DesctopFilter() {
+function desktopFilter() {
 	for (let i = 0; i < filterElems.length; i++) {
 		filterElems[i].addEventListener( "click", function(event) {
 			var target = event.target;
@@ -218,6 +207,7 @@ function DesctopFilter() {
 function tabMobFilter() {
 	for (let i = 0; i < dropdownContent.children.length; i++) {
 		dropdownContent.children[i].addEventListener( "click", function(event) {
+			if (window.innerWidth > 1024) return;
 			var target = event.target;
 			if (target.tagName != "LI" || target.previousElementSibling == null) return;
 
@@ -229,7 +219,10 @@ function tabMobFilter() {
 				}
 
 				filterElemsH2[i].innerHTML = h2Arr[i];          			//меняем значение filterElemsH2 на то что было в начале
-				addComma();								 					//добавляем запятую
+				if (target.parentElement != dropdownContent.children[dropdownContent.children.length - 1]) {
+					addComma();												//добавляем запятую
+				}
+				dropdownContent.children[i].children[1].style.color = 'black';
 				filterElemsH2[i].style.color = 'black';        				//меняем цвет filterElemsH2 на черный
 
 				for (var j = 0; j < dropdown[i].children.length; j++) { 
@@ -241,17 +234,21 @@ function tabMobFilter() {
 
 			if(selectedTd[i] == 0) {
 				filterElemsH2[i].innerHTML = target.innerHTML;              //меняем значение filterElemsH2 на выбраное
-				addComma();        											//добавляем запятую
+				if (target.parentElement != dropdownContent.children[dropdownContent.children.length - 1]) {
+					addComma();												//добавляем запятую
+				}
 				filterElemsH2[i].style.color = "rgb(241, 74, 88)";     		//меняем цвет filterElemsH2 на красный
+				dropdownContent.children[i].children[1].style.color = 'rgb(168, 168, 168)';
 				target.classList.add('highlight');                          //добавляем подсветку выбраному элемнту
 				selectedTd[i] = 1;
 			} else {
 				for (var j = 0; j < dropdown[i].children.length; j++) {
 					dropdown[i].children[j].classList.remove('highlight'); 	//снимаем класс highlight со всех детей dropdown
 				}
-
 				filterElemsH2[i].innerHTML = target.innerHTML;     			//меняем значение filterElemsH2 на выбраное
-				addComma();													//добавляем запятую
+				if (target.parentElement != dropdownContent.children[dropdownContent.children.length - 1]) {
+					addComma();												//добавляем запятую
+				}
 				target.classList.add('highlight');                       	//добавляем подсветку выбраному элемнту
 			}
 		});
@@ -277,6 +274,9 @@ function createAndInsert(tag) {
 			elem.classList.add('title');
 			filterElems[i].insertBefore(elem, filterElems[i].children[1]);
     	} else if (tag == 'span') {
+    		if (i == filterElems.length - 1) {
+    			break;
+    		}
     		if (filterElems[i].children[0].children.length == 0) {
 				elem.classList.add('comma');
 				elem.innerHTML = ',';

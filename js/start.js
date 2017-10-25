@@ -1,17 +1,79 @@
 var searchBtn = document.querySelector('.search__btn'),
 	searchInput = document.querySelector('.search__input'),
 	sandwich = document.querySelector('.sandwich'),
-	nav = document.querySelector('.navbar'),
 	close = document.querySelector('.hide-menu'),
 	slides = document.querySelectorAll(".slide"),
-	dots = document.querySelectorAll(".dot"),
+	dotsContainer = document.querySelector('.dots'), 
 
 	itemCount = document.querySelector('.item-count'),
-	priceCount = document.querySelector('.price-count');
+	priceCount = document.querySelector('.price-count'),
 
-var slideIndex = 1;
+	carousel = document.querySelector('.carousel');
+
+var slideIndex = 0;
 var count = 0;
+dotsNumber();
+var dots = document.querySelectorAll(".dot");
 var timer = setInterval(showSlides, 10000);
+
+for (let i = 0; i < dots.length; i++) {
+	dots[i].addEventListener( "click", function(event) {
+		clearInterval(timer);
+		count++;
+		slideIndex = i;
+		showSlides();
+    	timer = setInterval(showSlides, 10000);
+	});
+}
+
+function dotsNumber() {
+	for (var i = 0; i < slides.length; i++) {
+		var dot = document.createElement('div');
+		dot.classList.add('dot');
+		if (i == 0) {
+			dot.classList.add('active-dot');
+		}
+		dotsContainer.appendChild(dot);
+	}
+}
+
+function showSlides() {
+	if(count == 0) {
+  		slideIndex++;
+  	}
+	if (slideIndex >= slides.length) {
+        slideIndex = 0;
+	}
+	if (slideIndex < 0) {
+        slideIndex = slides.length - 1;
+	};
+	for (var i = 0; i < slides.length; i++) {
+    	slides[i].classList.remove('active-slide');  
+    }  
+ 	for (var i = 0; i < dots.length; i++) {  
+     	dots[i].classList.remove("active-dot");
+  	}
+  	slides[slideIndex].classList.add('active-slide');  
+  	dots[slideIndex].classList.add("active-dot");
+  	count = 0;
+}
+
+carousel.addEventListener( "click", function(event) {
+	var target = event.target;
+	if (target.classList.contains('arrow-left') || target.classList.contains('arrow-left__img')) {
+		clearInterval(timer);
+		count++;
+		slideIndex += -1;
+		showSlides();
+    	timer = setInterval(showSlides, 10000);	
+	} else if (target.classList.contains('arrow-right') || target.classList.contains('arrow-right__img')) {
+		clearInterval(timer);
+		count++;
+		slideIndex += 1;
+		showSlides();
+    	timer = setInterval(showSlides, 10000);	
+	}
+});
 
 if (window.innerWidth <= 1024 && window.innerWidth >= 768) {
     tablet();
@@ -21,18 +83,11 @@ if (window.innerWidth < 768) {
     mobile();
 }
 
-searchBtn.onclick = function() {
-	searchInput.classList.toggle('change');
-};
 sandwich.onclick = function() {
-	sandwich.style.display = 'none';
-	nav.style.display = 'block';
 	close.style.display = 'block';
 };
 close.onclick = function() {
 	close.style.display = 'none';
-	nav.style.display = 'none';
-	sandwich.style.display = 'block';
 };
 window.onresize = function() {
 	if (window.innerWidth > 1024) {
@@ -46,45 +101,7 @@ window.onresize = function() {
     }
 };
 
-function showSlides() {
-  if (slideIndex > slides.length) {
-        slideIndex = 1;
-		};    
-  if (slideIndex < 1) {
-        slideIndex = slides.length;
-		};
-  for (var i = 0; i < slides.length; i++) {
-    	 slides[i].classList.remove('active-slide');  
-    }  
-  for (var i = 0; i < dots.length; i++) {  
-     dots[i].classList.remove("active-dot");
-  }
-  slides[slideIndex-1].classList.add('active-slide');  
-  dots[slideIndex-1].classList.add("active-dot");
-  if(count == 0) {
-  	slideIndex++;
-  }
-
-}; 
-function plusSlides(n) {
-	clearInterval(timer);
-	count++;
-	slideIndex +=n;
-    showSlides();
-    timer = setInterval(showSlides, 10000);
-};
-function currentSlide(n) {
-	clearInterval(timer);
-	count++;
-	slideIndex = n;
-    showSlides();
-    count = 0;
-    timer = setInterval(showSlides, 10000);
-};
 function desktop() {
-	sandwich.style.display = 'none';
-    close.style.display = 'none';
-    nav.style.display = 'block';
 	for (var i = 0; i < slides.length; i++) {
 		if (i == 1) {
 			slides[i].innerHTML = 		
@@ -119,17 +136,11 @@ function desktop() {
 	}
 };
 function tablet() {
-	nav.style.display = 'block';
-    sandwich.style.display = 'none';
-    close.style.display = 'none';
 	for (var i = 0; i < slides.length; i++) {
 		slides[i].innerHTML = '<a href="item.html"><img src="images/slide-for-tab-' + i + '.jpg" alt=""></a>';
 	}
 };
 function mobile() {
-	sandwich.style.display = 'block';
-    nav.style.display = 'none';
-    close.style.display = 'none';
 	for (var i = 0; i < slides.length; i++) {
 		slides[i].innerHTML = '<a href="item.html"><img src="images/slide-for-mob-' + i + '.jpg" alt=""></a>';
 	}
