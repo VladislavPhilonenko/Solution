@@ -34,6 +34,9 @@ removeAllItemsBtn.onclick = function() {
 	bag.appendChild(h2);
 	resetPriceAndCount();
 }
+searchBtn.onclick = function() {
+	searchInput.classList.toggle('change');
+}
 sandwich.onclick = function() {
 	close.style.display = 'block';
 };

@@ -14,6 +14,9 @@ var searchBtn = document.querySelector('.search__btn'),
 ShowImages();
 selectProperty();
 
+searchBtn.onclick = function() {
+	searchInput.classList.toggle('change');
+}
 sandwich.onclick = function() {
 	close.style.display = 'block';
 };

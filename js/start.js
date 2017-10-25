@@ -83,6 +83,9 @@ if (window.innerWidth < 768) {
     mobile();
 }
 
+searchBtn.onclick = function() {
+	searchInput.classList.toggle('change');
+}
 sandwich.onclick = function() {
 	close.style.display = 'block';
 };
